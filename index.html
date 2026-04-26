@@ -10,7 +10,6 @@
     :root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
-      --secondary: #0ea5e9;
       --bg: #f1f5f9;
       --card: #ffffff;
       --text: #1e293b;
@@ -19,645 +18,458 @@
       --success: #16a34a;
       --warning: #d97706;
       --danger: #dc2626;
-      --radius: 12px;
+      --sidebar-w: 360px;
     }
+
+    html, body { height: 100%; overflow: hidden; }
 
     body {
       font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-      background: var(--bg);
+      display: flex;
+      flex-direction: column;
       color: var(--text);
-      min-height: 100vh;
     }
 
     /* ===== HEADER ===== */
-    header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    #header {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0ea5e9 100%);
       color: white;
-      padding: 24px 20px 32px;
-      text-align: center;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    header h1 {
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-    }
-    header p {
-      font-size: 0.9rem;
-      opacity: 0.85;
+    #header h1 { font-size: 1.1rem; font-weight: 800; }
+    #header p  { font-size: 0.75rem; opacity: 0.8; margin-top: 2px; }
+
+    /* ===== LAYOUT ===== */
+    #app {
+      display: flex;
+      flex: 1;
+      min-height: 0;
     }
 
-    /* ===== MAIN ===== */
-    main {
-      max-width: 800px;
-      margin: -16px auto 40px;
-      padding: 0 16px;
+    /* ===== SIDEBAR ===== */
+    #sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      z-index: 500;
     }
 
-    /* ===== SEARCH CARD ===== */
-    .search-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      padding: 24px;
-      margin-bottom: 24px;
-    }
-    .search-card h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
+    #search-panel {
+      background: white;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
     .tab-group {
       display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
       background: var(--bg);
       border-radius: 8px;
-      padding: 4px;
+      padding: 3px;
+      margin-bottom: 14px;
     }
     .tab-btn {
       flex: 1;
-      padding: 8px 12px;
+      padding: 7px 8px;
       border: none;
       background: transparent;
       border-radius: 6px;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       color: var(--muted);
-      transition: all 0.2s;
+      transition: all 0.15s;
     }
     .tab-btn.active {
       background: white;
       color: var(--primary);
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
-
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    .form-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-    .form-group {
-      flex: 1;
-      min-width: 160px;
-    }
+    .form-row { display: flex; gap: 8px; margin-bottom: 10px; }
+    .form-group { flex: 1; }
     .form-group label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--muted);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     select, input[type="text"] {
       width: 100%;
-      padding: 10px 12px;
+      padding: 8px 10px;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
+      border-radius: 7px;
+      font-size: 0.88rem;
       color: var(--text);
       background: white;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.15s;
     }
-    select:focus, input[type="text"]:focus {
-      border-color: var(--primary);
-    }
+    select:focus, input[type="text"]:focus { border-color: var(--primary); }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 11px 20px;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 16px;
       border: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
+      border-radius: 7px;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: white;
+      transition: all 0.15s;
       width: 100%;
-      justify-content: center;
     }
+    .btn-primary { background: var(--primary); color: white; }
     .btn-primary:hover { background: var(--primary-dark); }
     .btn-primary:active { transform: scale(0.98); }
-
-    .btn-geo {
-      background: var(--secondary);
-      color: white;
-      width: 100%;
-      justify-content: center;
-    }
+    .btn-geo { background: #0ea5e9; color: white; }
     .btn-geo:hover { background: #0284c7; }
 
-    .btn-sm {
-      padding: 7px 14px;
-      font-size: 0.82rem;
-      border-radius: 6px;
+    /* ===== RESULTS LIST ===== */
+    #results-header {
+      padding: 10px 16px 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--bg);
+      flex-shrink: 0;
     }
-    .btn-outline {
+    #results-header strong { color: var(--primary); }
+
+    #lib-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .lib-item {
       background: white;
-      border: 1.5px solid var(--primary);
-      color: var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 6px;
+      border-left: 3px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s;
     }
-    .btn-outline:hover { background: #eff6ff; }
-
-    /* ===== STATUS ===== */
-    #status {
-      text-align: center;
-      padding: 16px;
-      color: var(--muted);
+    .lib-item:hover {
+      border-left-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(37,99,235,0.12);
+      transform: translateX(2px);
+    }
+    .lib-item.active {
+      border-left-color: var(--primary);
+      background: #eff6ff;
+    }
+    .lib-item .lib-name {
       font-size: 0.9rem;
-    }
-    .spinner {
-      display: inline-block;
-      width: 20px; height: 20px;
-      border: 3px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ===== RESULTS ===== */
-    #result-count {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 12px;
-      padding-left: 4px;
-    }
-
-    .library-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .library-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      padding: 18px 20px;
-      border-left: 4px solid var(--primary);
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .library-card:hover {
-      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-      transform: translateY(-2px);
-    }
-
-    .lib-name {
-      font-size: 1.05rem;
       font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .lib-item .lib-addr {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .lib-item .no-geo-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      background: #f1f5f9;
+      color: var(--muted);
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-top: 3px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--muted);
+    }
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: 10px; }
+    .empty-state p { font-size: 0.85rem; line-height: 1.6; }
+
+    /* ===== MAP ===== */
+    #map {
+      flex: 1;
+      z-index: 1;
+    }
+
+    /* ===== LEAFLET CUSTOM ===== */
+    .lib-pin {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: 2.5px solid var(--primary);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lib-pin span {
+      transform: rotate(45deg);
+      font-size: 16px;
+      display: block;
+      line-height: 1;
+    }
+    .lib-pin.active {
+      background: var(--primary);
+      border-color: #1d4ed8;
+    }
+    .lib-pin.active span { filter: brightness(0) invert(1); }
+
+    /* Leaflet popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+      padding: 0 !important;
+    }
+    .leaflet-popup-content {
+      margin: 0 !important;
+      min-width: 280px;
+    }
+    .popup-inner {
+      padding: 16px;
+    }
+    .popup-name {
+      font-size: 1rem;
+      font-weight: 800;
       color: var(--text);
       margin-bottom: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
     }
-    .lib-meta {
-      font-size: 0.83rem;
+    .popup-row {
+      font-size: 0.82rem;
       color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 12px;
+      margin: 4px 0;
     }
-    .lib-meta span { display: flex; align-items: center; gap: 4px; }
-
-    .lib-actions {
+    .popup-links {
       display: flex;
       gap: 8px;
+      margin: 10px 0;
       flex-wrap: wrap;
     }
-
-    /* ===== BOOK CHECK SECTION ===== */
-    .book-check-area {
-      margin-top: 12px;
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 14px;
-      border: 1px solid var(--border);
-    }
-    .book-check-area h4 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .isbn-row {
-      display: flex;
-      gap: 8px;
-    }
-    .isbn-row input {
-      flex: 1;
-    }
-
-    /* ===== BOOK STATUS ===== */
-    .book-result {
-      margin-top: 12px;
-    }
-    .status-badge {
-      display: inline-block;
-      padding: 3px 10px;
+    .popup-links a {
+      font-size: 0.78rem;
+      color: var(--primary);
+      text-decoration: none;
+      background: #eff6ff;
+      padding: 3px 9px;
       border-radius: 20px;
+      font-weight: 600;
+    }
+    .popup-links a:hover { background: #dbeafe; }
+
+    .popup-book-section {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .popup-book-label {
       font-size: 0.78rem;
       font-weight: 700;
-    }
-    .status-ok { background: #dcfce7; color: var(--success); }
-    .status-loan { background: #fef3c7; color: var(--warning); }
-    .status-none { background: #fee2e2; color: var(--danger); }
-    .status-unknown { background: #f1f5f9; color: var(--muted); }
-    .status-checking { background: #dbeafe; color: var(--primary); }
-
-    .book-info {
-      font-size: 0.85rem;
-      margin-bottom: 8px;
       color: var(--muted);
+      margin-bottom: 8px;
     }
-    .lib-result-row {
+    .popup-isbn-row {
+      display: flex;
+      gap: 6px;
+    }
+    .popup-isbn-row input {
+      flex: 1;
+      padding: 7px 9px;
+      font-size: 0.82rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+    }
+    .popup-isbn-row input:focus { border-color: var(--primary); }
+    .popup-isbn-row button {
+      padding: 7px 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .popup-isbn-row button:hover { background: var(--primary-dark); }
+
+    #popup-result { margin-top: 8px; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .s-ok   { background: #dcfce7; color: #16a34a; }
+    .s-loan { background: #fef3c7; color: #d97706; }
+    .s-none { background: #fee2e2; color: #dc2626; }
+    .s-check{ background: #dbeafe; color: #2563eb; }
+    .s-unk  { background: #f1f5f9; color: #64748b; }
+
+    .book-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 0;
+      padding: 5px 0;
       border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
-      gap: 8px;
+      font-size: 0.82rem;
+      gap: 6px;
     }
-    .lib-result-row:last-child { border-bottom: none; }
-    .lib-result-name { font-weight: 600; flex: 1; }
-    .lib-result-status { flex-shrink: 0; }
+    .book-row:last-child { border-bottom: none; }
+    .book-row-name { font-weight: 600; flex: 1; }
 
-    /* ===== EMPTY STATE ===== */
-    .empty-state {
-      text-align: center;
-      padding: 48px 20px;
-      color: var(--muted);
-    }
-    .empty-state .icon {
-      font-size: 3rem;
-      margin-bottom: 12px;
-    }
-    .empty-state p {
-      font-size: 0.95rem;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: var(--muted);
+    .reserve-link {
+      display: block;
+      margin-top: 6px;
       font-size: 0.78rem;
+      color: var(--primary);
+      text-decoration: none;
     }
-    footer a { color: var(--primary); text-decoration: none; }
+    .reserve-link:hover { text-decoration: underline; }
 
-    @media (max-width: 480px) {
-      .form-row { flex-direction: column; }
-      .lib-actions { flex-direction: column; }
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== MOBILE ===== */
+    #mobile-toggle {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 900;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      #app { flex-direction: column-reverse; }
+      #sidebar {
+        width: 100%;
+        max-height: 45vh;
+        border-right: none;
+        border-top: 2px solid var(--border);
+        display: none;
+      }
+      #sidebar.open { display: flex; }
+      #map { flex: 1; min-height: 55vh; }
+      #mobile-toggle { display: block; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>📚 地元図書館サーチ</h1>
-  <p>近くの図書館を探して、蔵書の貸出状況も確認できます</p>
-</header>
-
-<main>
-  <!-- 検索フォーム -->
-  <div class="search-card">
-    <h2>図書館を探す</h2>
-
-    <div class="tab-group">
-      <button class="tab-btn active" onclick="switchTab('area')">🗾 地域から検索</button>
-      <button class="tab-btn" onclick="switchTab('geo')">📍 現在地から検索</button>
-    </div>
-
-    <!-- 地域検索 -->
-    <div id="tab-area" class="tab-panel active">
-      <div class="form-row">
-        <div class="form-group">
-          <label>都道府県</label>
-          <select id="pref-select">
-            <option value="">選択してください</option>
-            <option>北海道</option><option>青森県</option><option>岩手県</option>
-            <option>宮城県</option><option>秋田県</option><option>山形県</option>
-            <option>福島県</option><option>茨城県</option><option>栃木県</option>
-            <option>群馬県</option><option>埼玉県</option><option>千葉県</option>
-            <option>東京都</option><option>神奈川県</option><option>新潟県</option>
-            <option>富山県</option><option>石川県</option><option>福井県</option>
-            <option>山梨県</option><option>長野県</option><option>岐阜県</option>
-            <option>静岡県</option><option>愛知県</option><option>三重県</option>
-            <option>滋賀県</option><option>京都府</option><option>大阪府</option>
-            <option>兵庫県</option><option>奈良県</option><option>和歌山県</option>
-            <option>鳥取県</option><option>島根県</option><option>岡山県</option>
-            <option>広島県</option><option>山口県</option><option>徳島県</option>
-            <option>香川県</option><option>愛媛県</option><option>高知県</option>
-            <option>福岡県</option><option>佐賀県</option><option>長崎県</option>
-            <option>熊本県</option><option>大分県</option><option>宮崎県</option>
-            <option>鹿児島県</option><option>沖縄県</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>市区町村（任意）</label>
-          <input type="text" id="city-input" placeholder="例：渋谷区">
-        </div>
-      </div>
-      <button class="btn btn-primary" onclick="searchByArea()">
-        🔍 図書館を検索
-      </button>
-    </div>
-
-    <!-- 現在地検索 -->
-    <div id="tab-geo" class="tab-panel">
-      <p style="font-size:0.88rem; color:var(--muted); margin-bottom:14px;">
-        ブラウザの位置情報を使って、近くの図書館を探します。
-      </p>
-      <button class="btn btn-geo" onclick="searchByGeo()">
-        📍 現在地から探す
-      </button>
-    </div>
+<div id="header">
+  <div>
+    <h1>📚 地元図書館サーチ</h1>
+    <p>地図で図書館を探して、蔵書の貸出状況も確認</p>
   </div>
+</div>
 
-  <!-- ステータス表示 -->
-  <div id="status"></div>
+<div id="app">
+  <!-- サイドバー -->
+  <aside id="sidebar">
+    <!-- 検索フォーム -->
+    <div id="search-panel">
+      <div class="tab-group">
+        <button class="tab-btn active" id="tab-area-btn" onclick="switchTab('area')">🗾 地域</button>
+        <button class="tab-btn" id="tab-geo-btn" onclick="switchTab('geo')">📍 現在地</button>
+      </div>
 
-  <!-- 検索結果 -->
-  <div id="result-count"></div>
-  <div id="results" class="library-grid"></div>
-</main>
-
-<footer>
-  Powered by <a href="https://calil.jp/" target="_blank" rel="noopener">カーリル図書館API</a>
-</footer>
-
-<script>
-  const APPKEY = '3b9043faf7d20eb9e29543b0f804711e';
-  let jsonpCounter = 0;
-  let pollingTimers = {};
-
-  // ===== タブ切り替え =====
-  function switchTab(id) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
-  }
-
-  // ===== JSONP ヘルパー =====
-  function jsonp(url, cb) {
-    const name = '__calil_cb_' + (jsonpCounter++);
-    window[name] = function(data) {
-      cb(data);
-      delete window[name];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-    const script = document.createElement('script');
-    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + name;
-    script.onerror = function() {
-      setStatus('通信エラーが発生しました。もう一度お試しください。');
-      delete window[name];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-    document.head.appendChild(script);
-  }
-
-  // ===== ステータス =====
-  function setStatus(msg, loading) {
-    const el = document.getElementById('status');
-    if (!msg) { el.innerHTML = ''; return; }
-    el.innerHTML = loading
-      ? `<span class="spinner"></span>${msg}`
-      : msg;
-  }
-
-  // ===== 地域検索 =====
-  function searchByArea() {
-    const pref = document.getElementById('pref-select').value;
-    const city = document.getElementById('city-input').value.trim();
-    if (!pref) { alert('都道府県を選択してください'); return; }
-    clearResults();
-    setStatus('図書館を検索中...', true);
-    let url = `https://api.calil.jp/library?appkey=${APPKEY}&pref=${encodeURIComponent(pref)}&format=json`;
-    if (city) url += `&city=${encodeURIComponent(city)}`;
-    jsonp(url, displayLibraries);
-  }
-
-  // ===== 現在地検索 =====
-  function searchByGeo() {
-    if (!navigator.geolocation) {
-      alert('このブラウザは位置情報に対応していません');
-      return;
-    }
-    clearResults();
-    setStatus('位置情報を取得中...', true);
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        const { latitude: lat, longitude: lng } = pos.coords;
-        setStatus('近くの図書館を検索中...', true);
-        const url = `https://api.calil.jp/library?appkey=${APPKEY}&geocode=${lng},${lat}&format=json`;
-        jsonp(url, displayLibraries);
-      },
-      err => {
-        setStatus('位置情報の取得に失敗しました。ブラウザの設定を確認してください。');
-      }
-    );
-  }
-
-  // ===== 結果クリア =====
-  function clearResults() {
-    document.getElementById('results').innerHTML = '';
-    document.getElementById('result-count').innerHTML = '';
-    Object.values(pollingTimers).forEach(clearTimeout);
-    pollingTimers = {};
-  }
-
-  // ===== 図書館一覧表示 =====
-  function displayLibraries(data) {
-    setStatus('');
-    const container = document.getElementById('results');
-    container.innerHTML = '';
-
-    if (!data || data.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state">
-          <div class="icon">🔍</div>
-          <p>該当する図書館が見つかりませんでした。<br>市区町村名を変えてお試しください。</p>
-        </div>`;
-      return;
-    }
-
-    document.getElementById('result-count').innerHTML =
-      `<strong>${data.length}件</strong>の図書館が見つかりました`;
-
-    data.forEach((lib, idx) => {
-      const card = document.createElement('div');
-      card.className = 'library-card';
-      card.id = 'lib-' + idx;
-
-      const addr = lib.address || '住所不明';
-      const tel  = lib.tel    || '—';
-      const url  = lib.url_pc || lib.url_mobile || '';
-      const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lib.formal || lib.short || '')}+${encodeURIComponent(addr)}`;
-
-      card.innerHTML = `
-        <div class="lib-name">${lib.formal || lib.short || '図書館'}</div>
-        <div class="lib-meta">
-          <span>📍 ${addr}</span>
-          <span>📞 ${tel}</span>
-        </div>
-        <div class="lib-actions">
-          ${url ? `<a href="${url}" target="_blank" rel="noopener"><button class="btn btn-sm btn-outline">🌐 公式サイト</button></a>` : ''}
-          <a href="${mapUrl}" target="_blank" rel="noopener"><button class="btn btn-sm btn-outline">🗺️ 地図</button></a>
-          <button class="btn btn-sm btn-primary" onclick="toggleBookCheck(${idx}, '${escapeAttr(lib.systemid)}', '${escapeAttr(lib.formal || lib.short || '')}')">
-            📖 蔵書を確認
-          </button>
-        </div>
-        <div id="book-area-${idx}" style="display:none;">
-          <div class="book-check-area">
-            <h4>ISBN で蔵書を調べる</h4>
-            <div class="isbn-row">
-              <input type="text" id="isbn-${idx}" placeholder="例：9784101010014" maxlength="20"
-                     onkeydown="if(event.key==='Enter') checkBook(${idx},'${escapeAttr(lib.systemid)}')">
-              <button class="btn btn-sm btn-primary" onclick="checkBook(${idx},'${escapeAttr(lib.systemid)}')">検索</button>
-            </div>
-            <div id="book-result-${idx}" class="book-result"></div>
+      <div id="tab-area" class="tab-panel active">
+        <div class="form-row">
+          <div class="form-group">
+            <label>都道府県</label>
+            <select id="pref-select">
+              <option value="">選択してください</option>
+              <option>北海道</option><option>青森県</option><option>岩手県</option>
+              <option>宮城県</option><option>秋田県</option><option>山形県</option>
+              <option>福島県</option><option>茨城県</option><option>栃木県</option>
+              <option>群馬県</option><option>埼玉県</option><option>千葉県</option>
+              <option>東京都</option><option>神奈川県</option><option>新潟県</option>
+              <option>富山県</option><option>石川県</option><option>福井県</option>
+              <option>山梨県</option><option>長野県</option><option>岐阜県</option>
+              <option>静岡県</option><option>愛知県</option><option>三重県</option>
+              <option>滋賀県</option><option>京都府</option><option>大阪府</option>
+              <option>兵庫県</option><option>奈良県</option><option>和歌山県</option>
+              <option>鳥取県</option><option>島根県</option><option>岡山県</option>
+              <option>広島県</option><option>山口県</option><option>徳島県</option>
+              <option>香川県</option><option>愛媛県</option><option>高知県</option>
+              <option>福岡県</option><option>佐賀県</option><option>長崎県</option>
+              <option>熊本県</option><option>大分県</option><option>宮崎県</option>
+              <option>鹿児島県</option><option>沖縄県</option>
+            </select>
           </div>
-        </div>`;
-      container.appendChild(card);
-    });
-  }
+          <div class="form-group">
+            <label>市区町村（任意）</label>
+            <input type="text" id="city-input" placeholder="例：渋谷区">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="searchByArea()">🔍 図書館を検索</button>
+      </div>
 
-  function escapeAttr(s) {
-    return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;');
-  }
+      <div id="tab-geo" class="tab-panel">
+        <p style="font-size:0.8rem; color:var(--muted); margin-bottom:10px;">位置情報を使って近くの図書館を探します。</p>
+        <button class="btn btn-geo" onclick="searchByGeo()">📍 現在地から探す</button>
+      </div>
+    </div>
 
-  // ===== 蔵書確認トグル =====
-  function toggleBookCheck(idx, systemid, libname) {
-    const area = document.getElementById('book-area-' + idx);
-    if (area.style.display === 'none') {
-      area.style.display = 'block';
-      setTimeout(() => document.getElementById('isbn-' + idx).focus(), 50);
-    } else {
-      area.style.display = 'none';
-    }
-  }
+    <!-- 件数 -->
+    <div id="results-header"></div>
 
-  // ===== 蔵書チェック =====
-  function checkBook(idx, systemid) {
-    const isbnRaw = document.getElementById('isbn-' + idx).value.trim().replace(/-/g, '');
-    if (!isbnRaw) { alert('ISBNを入力してください'); return; }
-    if (!/^\d{10}(\d{3})?$/.test(isbnRaw)) {
-      alert('ISBNは10桁または13桁の数字で入力してください');
-      return;
-    }
+    <!-- 一覧 -->
+    <div id="lib-list">
+      <div class="empty-state">
+        <div class="icon">🗺️</div>
+        <p>都道府県を選んで<br>「図書館を検索」を押してください</p>
+      </div>
+    </div>
+  </aside>
 
-    const resultEl = document.getElementById('book-result-' + idx);
-    resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--muted);"><span class="spinner"></span>確認中...</p>`;
+  <!-- 地図 -->
+  <div id="map"></div>
+</div>
 
-    if (pollingTimers['poll-' + idx]) {
-      clearTimeout(pollingTimers['poll-' + idx]);
-      delete pollingTimers['poll-' + idx];
-    }
+<!-- モバイル：リスト表示トグル -->
+<button id="mobile-toggle" onclick="toggleSidebar()">📋 リスト</button>
 
-    const url = `https://api.calil.jp/check?appkey=${APPKEY}&isbn=${isbnRaw}&systemid=${encodeURIComponent(systemid)}&format=json`;
-    jsonp(url, function(data) {
-      handleCheckResult(idx, isbnRaw, systemid, data, resultEl);
-    });
-  }
-
-  // ===== ポーリング処理 =====
-  function handleCheckResult(idx, isbn, systemid, data, resultEl) {
-    if (!data) {
-      resultEl.innerHTML = '<p style="color:var(--danger);font-size:0.85rem;">エラーが発生しました</p>';
-      return;
-    }
-
-    renderBookResult(data, resultEl);
-
-    if (data.continue === 1) {
-      pollingTimers['poll-' + idx] = setTimeout(() => {
-        const pollUrl = `https://api.calil.jp/check?appkey=${APPKEY}&isbn=${isbn}&systemid=${encodeURIComponent(systemid)}&session=${data.session}&format=json`;
-        jsonp(pollUrl, function(d2) {
-          handleCheckResult(idx, isbn, systemid, d2, resultEl);
-        });
-      }, 2000);
-    }
-  }
-
-  // ===== 蔵書結果レンダリング =====
-  function renderBookResult(data, el) {
-    const books = data.books;
-    if (!books) {
-      el.innerHTML = '<p style="font-size:0.85rem;color:var(--muted);">蔵書情報なし</p>';
-      return;
-    }
-
-    const statusLabels = {
-      'OK':      { text: '貸出可',    cls: 'status-ok' },
-      'Running': { text: '確認中…',  cls: 'status-checking' },
-      'Rental':  { text: '貸出中',    cls: 'status-loan' },
-      'On-loan': { text: '貸出中',    cls: 'status-loan' },
-      'Return':  { text: '返却期限前', cls: 'status-loan' },
-      'Preparing':{ text: '準備中',   cls: 'status-loan' },
-      'Reserving':{ text: '予約中',   cls: 'status-loan' },
-      'No':      { text: '蔵書なし',  cls: 'status-none' },
-      'Error':   { text: 'エラー',    cls: 'status-unknown' },
-    };
-
-    let html = '';
-    let hasAny = false;
-
-    for (const isbn in books) {
-      const systems = books[isbn];
-      for (const sysid in systems) {
-        const sys = systems[sysid];
-        const libs = sys.libkey || {};
-        const libCount = Object.keys(libs).length;
-
-        if (libCount === 0) {
-          html += `<div class="lib-result-row">
-            <span class="lib-result-name">—</span>
-            <span class="lib-result-status"><span class="status-badge status-none">蔵書なし</span></span>
-          </div>`;
-          hasAny = true;
-          continue;
-        }
-
-        for (const libname in libs) {
-          const rawStatus = libs[libname];
-          const info = statusLabels[rawStatus] || { text: rawStatus, cls: 'status-unknown' };
-          html += `<div class="lib-result-row">
-            <span class="lib-result-name">${libname}</span>
-            <span class="lib-result-status"><span class="status-badge ${info.cls}">${info.text}</span></span>
-          </div>`;
-          hasAny = true;
-        }
-
-        if (sys.reserveurl) {
-          html += `<div style="margin-top:8px;font-size:0.82rem;">
-            <a href="${sys.reserveurl}" target="_blank" rel="noopener" style="color:var(--primary);">🔗 予約・詳細を見る</a>
-          </div>`;
-        }
-      }
-    }
-
-    if (!hasAny) {
-      html = '<p style="font-size:0.85rem;color:var(--muted);">蔵書情報が見つかりませんでした</p>';
-    }
-
-    el.innerHTML = html;
-  }
-</script>
+<script type="module" src="./main.js"></script>
 </body>
 </html>

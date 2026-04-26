@@ -22,5 +22,8 @@
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
   }
 }

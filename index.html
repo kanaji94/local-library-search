@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang=ja><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>地元図書館サーチ</title><style>*,:before,:after{box-sizing:border-box;margin:0;padding:0}:root{--primary:#2563eb;--primary-dark:#1d4ed8;--secondary:#0ea5e9;--bg:#f1f5f9;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--radius:12px}body{background:var(--bg);color:var(--text);min-height:100vh;font-family:Helvetica Neue,Arial,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,sans-serif}header{background:linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);color:#fff;text-align:center;padding:24px 20px 32px}header h1{letter-spacing:-.5px;margin-bottom:6px;font-size:clamp(1.4rem,4vw,2rem);font-weight:800}header p{opacity:.85;font-size:.9rem}main{max-width:800px;margin:-16px auto 40px;padding:0 16px}.search-card{background:var(--card);border-radius:var(--radius);margin-bottom:24px;padding:24px;box-shadow:0 4px 24px #00000014}.search-card h2{color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;font-size:1rem;font-weight:700}.tab-group{background:var(--bg);border-radius:8px;gap:8px;margin-bottom:20px;padding:4px;display:flex}.tab-btn{cursor:pointer;color:var(--muted);background:0 0;border:none;border-radius:6px;flex:1;padding:8px 12px;font-size:.88rem;font-weight:600;transition:all .2s}.tab-btn.active{color:var(--primary);background:#fff;box-shadow:0 1px 4px #0000001a}.tab-panel{display:none}.tab-panel.active{display:block}.form-row{flex-wrap:wrap;gap:10px;margin-bottom:12px;display:flex}.form-group{flex:1;min-width:160px}.form-group label{color:var(--muted);margin-bottom:6px;font-size:.8rem;font-weight:600;display:block}select,input[type=text]{border:1.5px solid var(--border);width:100%;color:var(--text);background:#fff;border-radius:8px;outline:none;padding:10px 12px;font-size:.95rem;transition:border-color .2s}select:focus,input[type=text]:focus{border-color:var(--primary)}.btn{cursor:pointer;border:none;border-radius:8px;align-items:center;gap:8px;padding:11px 20px;font-size:.95rem;font-weight:700;transition:all .2s;display:inline-flex}.btn-primary{background:var(--primary);color:#fff;justify-content:center;width:100%}.btn-primary:hover{background:var(--primary-dark)}.btn-primary:active{transform:scale(.98)}.btn-geo{background:var(--secondary);color:#fff;justify-content:center;width:100%}.btn-geo:hover{background:#0284c7}.btn-sm{border-radius:6px;padding:7px 14px;font-size:.82rem}.btn-outline{border:1.5px solid var(--primary);color:var(--primary);background:#fff}.btn-outline:hover{background:#eff6ff}#status{text-align:center;color:var(--muted);padding:16px;font-size:.9rem}.spinner{border:3px solid var(--border);border-top-color:var(--primary);vertical-align:middle;border-radius:50%;width:20px;height:20px;margin-right:8px;animation:.7s linear infinite spin;display:inline-block}@keyframes spin{to{transform:rotate(360deg)}}#result-count{color:var(--muted);margin-bottom:12px;padding-left:4px;font-size:.85rem}.library-grid{gap:12px;display:grid}.library-card{background:var(--card);border-radius:var(--radius);border-left:4px solid var(--primary);padding:18px 20px;transition:box-shadow .2s,transform .2s;box-shadow:0 2px 10px #0000000f}.library-card:hover{transform:translateY(-2px);box-shadow:0 4px 18px #0000001a}.lib-name{color:var(--text);margin-bottom:6px;font-size:1.05rem;font-weight:700}.lib-meta{color:var(--muted);flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:.83rem;display:flex}.lib-meta span{align-items:center;gap:4px;display:flex}.lib-actions{flex-wrap:wrap;gap:8px;display:flex}.book-check-area{border:1px solid var(--border);background:#f8fafc;border-radius:8px;margin-top:12px;padding:14px}.book-check-area h4{color:var(--muted);margin-bottom:10px;font-size:.85rem;font-weight:700}.isbn-row{gap:8px;display:flex}.isbn-row input{flex:1}.book-result{margin-top:12px}.status-badge{border-radius:20px;padding:3px 10px;font-size:.78rem;font-weight:700;display:inline-block}.status-ok{color:var(--success);background:#dcfce7}.status-loan{color:var(--warning);background:#fef3c7}.status-none{color:var(--danger);background:#fee2e2}.status-unknown{color:var(--muted);background:#f1f5f9}.status-checking{color:var(--primary);background:#dbeafe}.book-info{color:var(--muted);margin-bottom:8px;font-size:.85rem}.lib-result-row{border-bottom:1px solid var(--border);justify-content:space-between;align-items:center;gap:8px;padding:6px 0;font-size:.88rem;display:flex}.lib-result-row:last-child{border-bottom:none}.lib-result-name{flex:1;font-weight:600}.lib-result-status{flex-shrink:0}.empty-state{text-align:center;color:var(--muted);padding:48px 20px}.empty-state .icon{margin-bottom:12px;font-size:3rem}.empty-state p{font-size:.95rem}footer{text-align:center;color:var(--muted);padding:20px;font-size:.78rem}footer a{color:var(--primary);text-decoration:none}@media (width<=480px){.form-row,.lib-actions{flex-direction:column}}</style><body>
+
+<header>
+  <h1>📚 地元図書館サーチ</h1>
+  <p>近くの図書館を探して、蔵書の貸出状況も確認できます</p>
+</header>
+
+<main>
+  
+  <div class=search-card>
+    <h2>図書館を探す</h2>
+
+    <div class=tab-group>
+      <button class="active tab-btn" onclick="switchTab('area')">🗾 地域から検索</button>
+      <button class=tab-btn onclick="switchTab('geo')">📍 現在地から検索</button>
+    </div>
+
+    
+    <div id=tab-area class="active tab-panel">
+      <div class=form-row>
+        <div class=form-group>
+          <label>都道府県</label>
+          <select id=pref-select>
+            <option value>選択してください</option>
+            <option>北海道<option>青森県<option>岩手県</option>
+            <option>宮城県<option>秋田県<option>山形県</option>
+            <option>福島県<option>茨城県<option>栃木県</option>
+            <option>群馬県<option>埼玉県<option>千葉県</option>
+            <option>東京都<option>神奈川県<option>新潟県</option>
+            <option>富山県<option>石川県<option>福井県</option>
+            <option>山梨県<option>長野県<option>岐阜県</option>
+            <option>静岡県<option>愛知県<option>三重県</option>
+            <option>滋賀県<option>京都府<option>大阪府</option>
+            <option>兵庫県<option>奈良県<option>和歌山県</option>
+            <option>鳥取県<option>島根県<option>岡山県</option>
+            <option>広島県<option>山口県<option>徳島県</option>
+            <option>香川県<option>愛媛県<option>高知県</option>
+            <option>福岡県<option>佐賀県<option>長崎県</option>
+            <option>熊本県<option>大分県<option>宮崎県</option>
+            <option>鹿児島県<option>沖縄県</option>
+          </select>
+        </div>
+        <div class=form-group>
+          <label>市区町村（任意）</label>
+          <input id=city-input placeholder=例：渋谷区>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick=searchByArea()>
+        🔍 図書館を検索
+      </button>
+    </div>
+
+    
+    <div id=tab-geo class=tab-panel>
+      <p style=color:var(--muted);margin-bottom:14px;font-size:.88rem>
+        ブラウザの位置情報を使って、近くの図書館を探します。
+      </p>
+      <button class="btn btn-geo" onclick=searchByGeo()>
+        📍 現在地から探す
+      </button>
+    </div>
+  </div>
+
+  
+  <div id=status></div>
+
+  
+  <div id=result-count></div>
+  <div id=results class=library-grid></div>
+</main>
+
+<footer>
+  Powered by <a href=https://calil.jp/ target=_blank rel=noopener>カーリル図書館API</a>
+</footer>
+
+<script>const APPKEY="3b9043faf7d20eb9e29543b0f804711e";let jsonpCounter=0,pollingTimers={};function switchTab(e){document.querySelectorAll(".tab-panel").forEach(e=>e.classList.remove("active")),document.querySelectorAll(".tab-btn").forEach(e=>e.classList.remove("active")),document.getElementById("tab-"+e).classList.add("active"),event.target.classList.add("active")}function jsonp(e,t){let n="__calil_cb_"+jsonpCounter++;window[n]=function(e){t(e),delete window[n],s.parentNode&&s.parentNode.removeChild(s)};let s=document.createElement("script");s.src=e+(e.includes("?")?"&":"?")+"callback="+n,s.onerror=function(){setStatus("通信エラーが発生しました。もう一度お試しください。"),delete window[n],s.parentNode&&s.parentNode.removeChild(s)},document.head.appendChild(s)}function setStatus(e,t){let n=document.getElementById("status");if(!e){n.innerHTML="";return}n.innerHTML=t?`<span class="spinner"></span>${e}`:e}function searchByArea(){let e=document.getElementById("pref-select").value,t=document.getElementById("city-input").value.trim();if(!e)return void alert("都道府県を選択してください");clearResults(),setStatus("図書館を検索中...",!0);let n=`https://api.calil.jp/library?appkey=${APPKEY}&pref=${encodeURIComponent(e)}&format=json`;t&&(n+=`&city=${encodeURIComponent(t)}`),jsonp(n,displayLibraries)}function searchByGeo(){navigator.geolocation?(clearResults(),setStatus("位置情報を取得中...",!0),navigator.geolocation.getCurrentPosition(e=>{let{latitude:t,longitude:n}=e.coords;setStatus("近くの図書館を検索中...",!0),jsonp(`https://api.calil.jp/library?appkey=${APPKEY}&geocode=${n},${t}&format=json`,displayLibraries)},e=>{setStatus("位置情報の取得に失敗しました。ブラウザの設定を確認してください。")})):alert("このブラウザは位置情報に対応していません")}function clearResults(){document.getElementById("results").innerHTML="",document.getElementById("result-count").innerHTML="",Object.values(pollingTimers).forEach(clearTimeout),pollingTimers={}}function displayLibraries(e){setStatus("");let t=document.getElementById("results");if(t.innerHTML="",!e||0===e.length){t.innerHTML=`
+        <div class="empty-state">
+          <div class="icon">\u{1F50D}</div>
+          <p>\u{8A72}\u{5F53}\u{3059}\u{308B}\u{56F3}\u{66F8}\u{9928}\u{304C}\u{898B}\u{3064}\u{304B}\u{308A}\u{307E}\u{305B}\u{3093}\u{3067}\u{3057}\u{305F}\u{3002}<br>\u{5E02}\u{533A}\u{753A}\u{6751}\u{540D}\u{3092}\u{5909}\u{3048}\u{3066}\u{304A}\u{8A66}\u{3057}\u{304F}\u{3060}\u{3055}\u{3044}\u{3002}</p>
+        </div>`;return}document.getElementById("result-count").innerHTML=`<strong>${e.length}\u{4EF6}</strong>\u{306E}\u{56F3}\u{66F8}\u{9928}\u{304C}\u{898B}\u{3064}\u{304B}\u{308A}\u{307E}\u{3057}\u{305F}`,e.forEach((e,n)=>{let s=document.createElement("div");s.className="library-card",s.id="lib-"+n;let l=e.address||"住所不明",o=e.tel||"—",u=e.url_pc||e.url_mobile||"",a=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.formal||e.short||"")}+${encodeURIComponent(l)}`;s.innerHTML=`
+        <div class="lib-name">${e.formal||e.short||"図書館"}</div>
+        <div class="lib-meta">
+          <span>\u{1F4CD} ${l}</span>
+          <span>\u{1F4DE} ${o}</span>
+        </div>
+        <div class="lib-actions">
+          ${u?`<a href="${u}" target="_blank" rel="noopener"><button class="btn btn-sm btn-outline">\u{1F310} \u{516C}\u{5F0F}\u{30B5}\u{30A4}\u{30C8}</button></a>`:""}
+          <a href="${a}" target="_blank" rel="noopener"><button class="btn btn-sm btn-outline">\u{1F5FA}\u{FE0F} \u{5730}\u{56F3}</button></a>
+          <button class="btn btn-sm btn-primary" onclick="toggleBookCheck(${n}, '${escapeAttr(e.systemid)}', '${escapeAttr(e.formal||e.short||"")}')">
+            \u{1F4D6} \u{8535}\u{66F8}\u{3092}\u{78BA}\u{8A8D}
+          </button>
+        </div>
+        <div id="book-area-${n}" style="display:none;">
+          <div class="book-check-area">
+            <h4>ISBN \u{3067}\u{8535}\u{66F8}\u{3092}\u{8ABF}\u{3079}\u{308B}</h4>
+            <div class="isbn-row">
+              <input type="text" id="isbn-${n}" placeholder="\u{4F8B}\u{FF1A}9784101010014" maxlength="20"
+                     onkeydown="if(event.key==='Enter') checkBook(${n},'${escapeAttr(e.systemid)}')">
+              <button class="btn btn-sm btn-primary" onclick="checkBook(${n},'${escapeAttr(e.systemid)}')">\u{691C}\u{7D22}</button>
+            </div>
+            <div id="book-result-${n}" class="book-result"></div>
+          </div>
+        </div>`,t.appendChild(s)})}function escapeAttr(e){return String(e).replace(/'/g,"\\'").replace(/"/g,"&quot;")}function toggleBookCheck(e,t,n){let s=document.getElementById("book-area-"+e);"none"===s.style.display?(s.style.display="block",setTimeout(()=>document.getElementById("isbn-"+e).focus(),50)):s.style.display="none"}function checkBook(e,t){let n=document.getElementById("isbn-"+e).value.trim().replace(/-/g,"");if(!n)return void alert("ISBNを入力してください");if(!/^\d{10}(\d{3})?$/.test(n))return void alert("ISBNは10桁または13桁の数字で入力してください");let s=document.getElementById("book-result-"+e);s.innerHTML='<p style="font-size:0.85rem; color:var(--muted);"><span class="spinner"></span>確認中...</p>',pollingTimers["poll-"+e]&&(clearTimeout(pollingTimers["poll-"+e]),delete pollingTimers["poll-"+e]),jsonp(`https://api.calil.jp/check?appkey=${APPKEY}&isbn=${n}&systemid=${encodeURIComponent(t)}&format=json`,function(l){handleCheckResult(e,n,t,l,s)})}function handleCheckResult(e,t,n,s,l){if(!s){l.innerHTML='<p style="color:var(--danger);font-size:0.85rem;">エラーが発生しました</p>';return}renderBookResult(s,l),1===s.continue&&(pollingTimers["poll-"+e]=setTimeout(()=>{jsonp(`https://api.calil.jp/check?appkey=${APPKEY}&isbn=${t}&systemid=${encodeURIComponent(n)}&session=${s.session}&format=json`,function(s){handleCheckResult(e,t,n,s,l)})},2e3))}function renderBookResult(e,t){let n=e.books;if(!n){t.innerHTML='<p style="font-size:0.85rem;color:var(--muted);">蔵書情報なし</p>';return}let s={OK:{text:"貸出可",cls:"status-ok"},Running:{text:"確認中…",cls:"status-checking"},Rental:{text:"貸出中",cls:"status-loan"},"On-loan":{text:"貸出中",cls:"status-loan"},Return:{text:"返却期限前",cls:"status-loan"},Preparing:{text:"準備中",cls:"status-loan"},Reserving:{text:"予約中",cls:"status-loan"},No:{text:"蔵書なし",cls:"status-none"},Error:{text:"エラー",cls:"status-unknown"}},l="",o=!1;for(let e in n){let t=n[e];for(let e in t){let n=t[e],u=n.libkey||{};if(0===Object.keys(u).length){l+=`<div class="lib-result-row">
+            <span class="lib-result-name">\u{2014}</span>
+            <span class="lib-result-status"><span class="status-badge status-none">\u{8535}\u{66F8}\u{306A}\u{3057}</span></span>
+          </div>`,o=!0;continue}for(let e in u){let t=u[e],n=s[t]||{text:t,cls:"status-unknown"};l+=`<div class="lib-result-row">
+            <span class="lib-result-name">${e}</span>
+            <span class="lib-result-status"><span class="status-badge ${n.cls}">${n.text}</span></span>
+          </div>`,o=!0}n.reserveurl&&(l+=`<div style="margin-top:8px;font-size:0.82rem;">
+            <a href="${n.reserveurl}" target="_blank" rel="noopener" style="color:var(--primary);">\u{1F517} \u{4E88}\u{7D04}\u{30FB}\u{8A73}\u{7D30}\u{3092}\u{898B}\u{308B}</a>
+          </div>`)}}o||(l='<p style="font-size:0.85rem;color:var(--muted);">蔵書情報が見つかりませんでした</p>'),t.innerHTML=l}</script>
+
+
